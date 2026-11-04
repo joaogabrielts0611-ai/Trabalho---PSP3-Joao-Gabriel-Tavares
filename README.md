@@ -13,6 +13,7 @@ Análise exploratória e estatística da base *US Grocery and Gas Prices (2015-2
 |---|---|
 | **Colab** (botão acima) | Rodar tudo e usar o painel interativo: `Ambiente de execução → Executar tudo`. Nada precisa ser instalado; os dados são baixados deste repositório. |
 | **nbviewer** (botão acima) | Ler o notebook já executado, com todos os gráficos interativos, sem rodar nada. |
+| `relatorio_analise.html` | O notebook executado em uma página HTML única: baixe e abra no navegador (precisa de internet para carregar a biblioteca de gráficos). |
 | GitHub | O GitHub mostra o texto e as tabelas, mas **não** desenha os gráficos Plotly. Use um dos links acima. |
 
 ## O que o notebook faz
@@ -36,6 +37,7 @@ Análise exploratória e estatística da base *US Grocery and Gas Prices (2015-2
 ```
 analise_precos_eua.ipynb   notebook principal (executado)
 analise_precos_eua.py      mesmo notebook em formato texto (jupytext), para revisar diferenças
+relatorio_analise.html     versão HTML do notebook executado
 data/
   us_average_prices_monthly.csv        formato longo (item × mês)
   us_average_prices_wide.csv           formato largo (mês × item)
