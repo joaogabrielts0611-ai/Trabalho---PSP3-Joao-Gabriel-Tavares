@@ -27,7 +27,7 @@
 # 4. **Defasagens.** O preço do diesel e da gasolina antecipa o preço dos alimentos? (correlação cruzada e teste de Granger)
 # 5. **Painel interativo.** Explorador de item, comparador de qualquer par, ranking filtrável de pares e cesta personalizada.
 #
-# > **Como usar:** no Colab, `Ambiente de execução → Executar tudo`. Os gráficos são interativos (passe o mouse, clique na legenda para esconder séries, arraste para dar zoom). Os controles da Seção 7 precisam do notebook em execução.
+# > **Como usar:** no Colab, `Ambiente de execução → Executar tudo`. Os gráficos são interativos (passe o mouse, clique na legenda para esconder séries, arraste para dar zoom). Os controles da Seção 6 precisam do notebook em execução.
 
 # %% [markdown]
 # ## 0. Configuração
@@ -37,6 +37,10 @@ import os, re, sys, io, contextlib, warnings
 warnings.filterwarnings("ignore")
 
 IN_COLAB = "google.colab" in sys.modules
+if IN_COLAB:
+    # permite que os gráficos Plotly apareçam dentro dos controles interativos (ipywidgets) no Colab
+    from google.colab import output as _colab_output
+    _colab_output.enable_custom_widget_manager()
 
 import numpy as np
 import pandas as pd
