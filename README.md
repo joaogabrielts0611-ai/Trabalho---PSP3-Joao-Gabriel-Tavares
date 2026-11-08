@@ -1,7 +1,7 @@
 # Preços do dia a dia nos EUA (BLS, 2015–2026): auditoria, inflação real e correlações entre pares
 
-[![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/joaogabrielts0611-ai/analise-precos-eua-bls/blob/main/analise_precos_eua.ipynb)
-[![Ver no nbviewer](https://img.shields.io/badge/ver%20com%20gr%C3%A1ficos-nbviewer-orange)](https://nbviewer.org/github/joaogabrielts0611-ai/analise-precos-eua-bls/blob/main/analise_precos_eua.ipynb)
+[![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/joaogabrielts0611-ai/Trabalho---PSP3-Joao-Gabriel-Tavares/blob/main/analise_precos_eua.ipynb)
+[![Ver no nbviewer](https://img.shields.io/badge/ver%20com%20gr%C3%A1ficos-nbviewer-orange)](https://nbviewer.org/github/joaogabrielts0611-ai/Trabalho---PSP3-Joao-Gabriel-Tavares/blob/main/analise_precos_eua.ipynb)
 
 **Autor:** João Gabriel Tavares Silva
 
@@ -64,6 +64,6 @@ jupyter lab analise_precos_eua.ipynb
 
 O short paper em ABNT (classe abnTeX2) está na pasta `shortpaper/`: `main.tex`, `referencias.bib`, figuras e o PDF compilado (`shortpaper.pdf`).
 
-[![Abrir no Overleaf](https://img.shields.io/badge/abrir%20no-Overleaf-47A141)](https://www.overleaf.com/docs?snip_uri=https://raw.githubusercontent.com/joaogabrielts0611-ai/analise-precos-eua-bls/main/shortpaper-overleaf.zip)
+[![Abrir no Overleaf](https://img.shields.io/badge/abrir%20no-Overleaf-47A141)](https://www.overleaf.com/docs?snip_uri=https://raw.githubusercontent.com/joaogabrielts0611-ai/Trabalho---PSP3-Joao-Gabriel-Tavares/main/shortpaper-overleaf.zip)
 
 O botão acima cria uma cópia do projeto na conta Overleaf de quem clicar. Compilador: pdfLaTeX (padrão).

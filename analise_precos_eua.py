@@ -15,7 +15,7 @@
 #
 # **Autor:** João Gabriel Tavares Silva
 #
-# [![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/joaogabrielts0611-ai/analise-precos-eua-bls/blob/main/analise_precos_eua.ipynb)
+# [![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/joaogabrielts0611-ai/Trabalho---PSP3-Joao-Gabriel-Tavares/blob/main/analise_precos_eua.ipynb)
 #
 # **Base:** *US Grocery and Gas Prices (2015-2026)* (Kaggle), compilada a partir do programa **Average Price Data (AP)** do US Bureau of Labor Statistics. São 74 itens, mensais, de jan/2015 a jul/2026, em dólares correntes (não é índice), média nacional ("U.S. city average"), sem ajuste sazonal.
 #
@@ -94,7 +94,7 @@ print("Ambiente:", "Google Colab" if IN_COLAB else "Jupyter local", "| pandas", 
 # Os arquivos ficam na pasta `data/` do repositório. Se o notebook estiver rodando fora dela (como no Colab), eles são baixados direto do GitHub.
 
 # %%
-REPO_RAW = "https://raw.githubusercontent.com/joaogabrielts0611-ai/analise-precos-eua-bls/main/data/"
+REPO_RAW = "https://raw.githubusercontent.com/joaogabrielts0611-ai/Trabalho---PSP3-Joao-Gabriel-Tavares/main/data/"
 
 def carregar(nome, **kw):
     local = os.path.join("data", nome)
