@@ -59,3 +59,11 @@ jupyter lab analise_precos_eua.ipynb
 * U.S. Bureau of Labor Statistics, Average Price Data (AP), U.S. city average, mensal, sem ajuste sazonal. Obras do governo federal dos EUA são de domínio público.
 * CPI-U, All items, U.S. city average, NSA (série FRED CPIAUCNS). Out/2025 não foi publicado (paralisação do governo) e é interpolado no notebook.
 * O BLS não endossa esta compilação nem esta análise.
+
+## Short paper (LaTeX / Overleaf)
+
+O short paper em ABNT (classe abnTeX2) está na pasta `shortpaper/`: `main.tex`, `referencias.bib`, figuras e o PDF compilado (`shortpaper.pdf`).
+
+[![Abrir no Overleaf](https://img.shields.io/badge/abrir%20no-Overleaf-47A141)](https://www.overleaf.com/docs?snip_uri=https://raw.githubusercontent.com/joaogabrielts0611-ai/analise-precos-eua-bls/main/shortpaper-overleaf.zip)
+
+O botão acima cria uma cópia do projeto na conta Overleaf de quem clicar. Compilador: pdfLaTeX (padrão).

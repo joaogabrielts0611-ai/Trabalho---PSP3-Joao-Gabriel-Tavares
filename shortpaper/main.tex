@@ -1,0 +1,268 @@
+% =====================================================================
+% Short paper - Preços do dia a dia nos EUA (2015-2026)
+% Aluno: João Gabriel Tavares Silva - Matrícula 221021071 - UnB
+% Classe abnTeX2 (ABNT NBR 6022:2018 - artigo científico)
+% Compilar com pdfLaTeX + BibTeX (padrão do Overleaf)
+% =====================================================================
+\documentclass[
+  article,            % artigo acadêmico
+  12pt,
+  oneside,
+  a4paper,
+  section=TITLE,      % seções primárias em maiúsculas
+  english,            % idioma adicional (abstract)
+  brazil              % idioma principal
+]{abntex2}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{times}              % fonte Times (ABNT)
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[alf]{abntex2cite}   % citações autor-data (ABNT NBR 10520)
+
+\graphicspath{{figuras/}}
+
+% ---------- Dados do documento ----------
+\titulo{Preços do dia a dia nos EUA (2015--2026): inflação real e correlações entre pares de itens}
+\tituloestrangeiro{Everyday prices in the US (2015--2026): real inflation and pairwise correlations between items}
+\autor{João Gabriel Tavares Silva}
+\local{Brasília}
+\data{2026}
+
+\makeatletter
+\hypersetup{
+  pdftitle={\@title},
+  pdfauthor={\@author},
+  pdfsubject={Short paper - análise de preços médios do BLS},
+  colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue
+}
+\makeatother
+
+% ---------- Layout ABNT ----------
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0.2cm}
+\OnehalfSpacing
+
+% Títulos em Times negrito (seções primárias em maiúsculas pela opção section=TITLE)
+\renewcommand{\ABNTEXchapterfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+
+% Tabelas: texto menor e espaçamento simples
+\newcommand{\tabelaabnt}{\footnotesize\SingleSpacing}
+
+\begin{document}
+\selectlanguage{brazil}
+\frenchspacing
+\renewcommand{\resumoname}{RESUMO}
+\renewcommand{\bibname}{REFERÊNCIAS}
+\renewcommand{\refname}{REFERÊNCIAS}
+
+% ---------- Cabeçalho com logo da UnB ----------
+\begin{center}
+  \includegraphics[width=3cm]{logo-unb}\\[0.6cm]
+  {\large\bfseries Preços do dia a dia nos EUA (2015--2026): inflação real e correlações entre pares de itens\par}
+  \vspace{0.6cm}
+  {\normalsize João Gabriel Tavares Silva\footnote{Aluno da Universidade de Brasília (UnB). Matrícula: 221021071.}\par}
+  {\small Universidade de Brasília (UnB)\par}
+\end{center}
+\vspace{0.4cm}
+
+% ---------- Resumo ----------
+\begin{resumoumacoluna}
+  \SingleSpacing
+  Este trabalho analisa os preços médios mensais de 74 itens de consumo nos Estados Unidos entre janeiro de 2015 e julho de 2026, publicados pelo programa \textit{Average Price Data} do Bureau of Labor Statistics (BLS). Uma auditoria da base encontrou seis problemas que alteram as conclusões divulgadas com ela, entre eles janelas de comparação que não correspondem ao calendário, categorias trocadas e inflação subestimada. Corrigida a base e deflacionados os preços pelo CPI-U (+38,5\% no período), todos os 62 itens com dados suficientes ficaram mais caros em dólares correntes, mas apenas 35 subiram acima da inflação. Nas correlações entre os 1.891 pares de itens, 86\% têm $|r| > 0{,}5$ quando se comparam níveis de preço, contra 3\% quando se comparam variações mensais dessazonalizadas: a maior parte da associação aparente é tendência comum. As relações robustas ficam dentro de uma mesma cadeia produtiva (carnes, combustíveis). A inflação do diesel antecede a dos alimentos em cerca de cinco meses ($r = 0{,}51$), mas a precedência estatística é fraca e concentrada no choque de 2021--2022.
+
+  \vspace{\onelineskip}
+  \noindent
+  \textbf{Palavras-chave}: preços ao consumidor; inflação; correlação espúria; causalidade de Granger; BLS.
+\end{resumoumacoluna}
+
+\renewcommand{\resumoname}{ABSTRACT}
+\begin{resumoumacoluna}
+  \SingleSpacing
+  \begin{otherlanguage*}{english}
+    This paper analyzes the monthly average prices of 74 consumer items in the United States from January 2015 to July 2026, published by the Bureau of Labor Statistics (BLS) Average Price Data program. An audit of the dataset found six problems that change the conclusions released with it, including comparison windows that do not match the calendar, misclassified categories and underestimated inflation. After correcting the data and deflating prices by the CPI-U (+38.5\% over the period), all 62 items with sufficient data became more expensive in current dollars, but only 35 rose faster than inflation. Across the 1,891 pairs of items, 86\% show $|r| > 0.5$ when price levels are compared, against 3\% when deseasonalized monthly changes are compared: most of the apparent association is a common trend. Robust relationships stay within the same supply chain (meats, fuels). Diesel inflation leads food inflation by about five months ($r = 0.51$), but statistical precedence is weak and concentrated in the 2021--2022 shock.
+
+    \vspace{\onelineskip}
+    \noindent
+    \textbf{Keywords}: consumer prices; inflation; spurious correlation; Granger causality; BLS.
+  \end{otherlanguage*}
+\end{resumoumacoluna}
+
+\textual
+
+% =====================================================================
+\section{Introdução}
+
+O choque inflacionário de 2021--2022 recolocou no debate público o custo de itens básicos como ovos, carne, leite e gasolina. Índices agregados, como o CPI, mostram a inflação média, mas escondem trajetórias muito diferentes entre produtos. A série de preços médios do BLS permite olhar item a item, em dólares, e por isso circula amplamente em bases públicas como o Kaggle.
+
+O trabalho responde a três perguntas. Primeiro, quais itens ficaram mais caros em termos reais, isto é, acima da inflação geral? Segundo, quais pares de itens se movem juntos quando a tendência comum é removida? Terceiro, o preço da energia antecipa o preço dos alimentos?
+
+A contribuição é dupla. Do lado dos dados, documenta problemas de construção da base que alteram os resultados divulgados com ela. Do lado do método, mostra que a correlação entre níveis de preço, a medida mais usada em análises exploratórias, leva a conclusões espúrias nesse tipo de série. O código completo, interativo e reproduzível \cite{silva2026precos} está em um notebook público (\href{https://github.com/joaogabrielts0611-ai/analise-precos-eua-bls}{GitHub} $\cdot$ \href{https://colab.research.google.com/github/joaogabrielts0611-ai/analise-precos-eua-bls/blob/main/analise_precos_eua.ipynb}{Google Colab}).
+
+% =====================================================================
+\section{Dados e método}
+
+\subsection{Base de dados}
+
+A base reúne 8.869 observações item-mês de 74 itens (carnes, laticínios, hortifrúti, grãos, bebidas e energia), com preço médio nacional (\textit{U.S. city average}), sem ajuste sazonal, de jan./2015 a jul./2026 \cite{bls2026}. Para deflacionar usou-se o CPI-U, todos os itens, sem ajuste sazonal, série CPIAUCNS \cite{fred2026}. Outubro de 2025 não foi publicado por causa da paralisação do governo federal americano e foi interpolado.
+
+\subsection{Auditoria e correções}
+
+A conferência da base contra o próprio resumo que a acompanha encontrou seis problemas (Tabela~\ref{tab:auditoria}).
+
+\begin{table}[htbp]
+  \centering
+  \caption{Problemas encontrados na base e correção adotada}
+  \label{tab:auditoria}
+  \tabelaabnt
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+    \toprule
+    \textbf{Problema} & \textbf{Efeito} & \textbf{Correção} \\
+    \midrule
+    Café classificado como carne bovina; batata chips como hortaliça & Inflava a mediana da carne bovina & Reclassificação em 8 grupos \\
+    ``Média dos primeiros 12 meses'' = 12 primeiras observações & Em séries com buracos, a janela chega a 113 meses (milho em lata) & Janelas de calendário: 2015 $\times$ ago./2025--jul./2026, mínimo de 8 meses em cada \\
+    Séries iniciadas em 2015 e em 2018 na mesma mediana & Compara horizontes diferentes & Taxa anual equivalente \\
+    Séries vivas marcadas como descontinuadas & Excluía pão integral, costeleta e laranja & Critério de cobertura na janela final (62 séries) \\
+    Inflação do período informada como $\sim$35\% & Superestimava ganhos reais & CPI-U oficial: +38,5\% \\
+    Base dos ovos (2015) em surto de gripe aviária & Variação de +9,5\% subestimada & Comparação adicional contra 2016--2019 \\
+    \bottomrule
+  \end{tabularx}
+  \fonte{Elaboração própria a partir de \citeonline{bls2026}.}
+\end{table}
+
+\subsection{Medidas}
+
+A variação de cada item compara a média da janela inicial com a da final, o que neutraliza a sazonalidade. A variação real usa preços em dólares de jul./2026, deflacionados mês a mês pelo CPI-U. Índices de grupo são médias geométricas dos preços relativos, o mesmo princípio dos índices elementares do CPI.
+
+As correlações entre pares foram calculadas em três transformações: o nível do preço, a variação em 12 meses e a variação mensal do logaritmo do preço dessazonalizada (subtraída a média de cada mês do ano). A terceira é a medida principal, porque séries com tendência produzem correlações altas sem relação real \cite{granger1974}. Com 1.891 pares testados, os p-valores foram corrigidos por \citeonline{benjamini1995}. A robustez foi verificada pela correlação de Spearman e pela exclusão de mar.--ago./2020.
+
+Para a relação entre energia e alimentos usaram-se a correlação cruzada com defasagens de 0 a 12 meses, o teste de causalidade de \citeonline{granger1969} com seis defasagens e uma regressão com erros-padrão de \citeonline{newey1987}.
+
+% =====================================================================
+\section{Resultados}
+
+\subsection{Inflação nominal e real}
+
+Os 62 itens subiram em dólares correntes, com mediana de +42\%. Descontada a inflação, só 35 subiram acima do CPI-U, e a mediana real cai para +3,8\%. Os maiores ganhos reais foram do café (+43\%), do refrigerante em lata (+30\%) e do suco de laranja (+29\%). As maiores quedas reais foram do macarrão ($-$28\%), do limão ($-$26\%) e da costeleta suína sem osso ($-$24\%).
+
+\begin{table}[htbp]
+  \centering
+  \caption{Variação de preços por grupo, 2015 $\rightarrow$ ago./2025--jul./2026 (medianas)}
+  \label{tab:grupos}
+  \tabelaabnt
+  \begin{tabular}{lccccc}
+    \toprule
+    \textbf{Grupo} & \textbf{Itens} & \textbf{Nominal} & \textbf{Real} & \textbf{Real (\% a.a.)} & \textbf{Acima da inflação} \\
+    \midrule
+    Carne bovina & 12 & +57,8\% & +13,8\% & +1,23 & 11 de 12 \\
+    Bebidas e café & 5 & +46,5\% & +12,4\% & +1,60 & 4 de 5 \\
+    Energia & 8 & +54,6\% & +11,5\% & +1,03 & 8 de 8 \\
+    Grãos, padaria e mercearia & 9 & +36,6\% & $-$1,1\% & $-$0,11 & 4 de 9 \\
+    Hortifrúti & 10 & +31,1\% & $-$5,5\% & $-$0,55 & 5 de 10 \\
+    Suínos e frios & 7 & +25,9\% & $-$9,1\% & $-$0,90 & 1 de 7 \\
+    Laticínios & 7 & +21,0\% & $-$12,7\% & $-$1,28 & 2 de 7 \\
+    Aves e ovos & 4 & +15,9\% & $-$16,4\% & $-$1,69 & 0 de 4 \\
+    \bottomrule
+  \end{tabular}
+  \fonte{Elaboração própria a partir de \citeonline{bls2026} e \citeonline{fred2026}.}
+\end{table}
+
+A alta real não foi gradual. Entre 2015 e 2019, quase todos os grupos perderam de 0,5\% a 4,6\% ao ano para a inflação. No choque de 2020--2022, todos ganharam, com destaque para aves e ovos (+12,1\% a.a.) e energia (+6,1\% a.a.). Depois de 2023, só a carne bovina manteve alta real forte (+6,1\% a.a.). A Figura~\ref{fig:indices} mostra essas trajetórias contra o CPI-U.
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Índices de preço por grupo e CPI-U (média de 2015 = 100)}
+  \label{fig:indices}
+  \includegraphics[width=0.95\textwidth]{fig1_indices}
+  \fonte{Elaboração própria a partir de \citeonline{bls2026} e \citeonline{fred2026}. Índices de grupo = média geométrica dos preços relativos de cada item.}
+\end{figure}
+
+No pico do choque, as carnes chegaram primeiro ao máximo da inflação em 12 meses (novembro de 2021), a energia em junho de 2022 (+44\%) e os alimentos mais processados por último, entre outubro e dezembro de 2022. Itens com mais etapas de processamento repassam custos com mais atraso.
+
+Os ovos ilustram o risco de um período-base mal escolhido. Contra 2015, ano de surto de gripe aviária, a alta nominal é de apenas 6\%. Contra 2016--2019, é de 67\%. A média dos últimos 12 meses (US\$~2,62 a dúzia) ainda está 26\% acima da tendência pré-crise corrigida pela inflação, depois de um pico de US\$~6,23 em março de 2025.
+
+\subsection{Correlações entre pares}
+
+A medida escolhida muda o resultado mais do que qualquer outra decisão da análise (Figura~\ref{fig:correlacoes}). Em nível de preço, a correlação média entre os 1.891 pares é 0,72 e 86\% dos pares têm $|r| > 0{,}5$. Em variação mensal dessazonalizada, a média cai para 0,06 e só 3\% passam de 0,5. Refrigerante em lata e cookies, por exemplo, têm $r = 0{,}97$ em nível e $r = -0{,}02$ em variação mensal.
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Distribuição das correlações entre os 1.891 pares, por medida}
+  \label{fig:correlacoes}
+  \includegraphics[width=0.95\textwidth]{fig2_correlacoes}
+  \fonte{Elaboração própria a partir de \citeonline{bls2026}.}
+\end{figure}
+
+Após a correção para múltiplas comparações, 170 pares (9\%) são significativos a 5\% em variação mensal, 75 deles entre grupos diferentes. Os pares mais fortes são de um mesmo produto ou cadeia: as gasolinas entre si ($r \approx 1{,}00$), diesel e gasolina ($r = 0{,}79$) e os cortes bovinos ($r$ de 0,63 a 0,88). Entre grupos, os pares mais fortes ligam carne suína e bovina (Tabela~\ref{tab:pares}).
+
+\begin{table}[htbp]
+  \centering
+  \caption{Pares mais fortes entre grupos diferentes (variação mensal dessazonalizada)}
+  \label{tab:pares}
+  \tabelaabnt
+  \begin{tabular}{llccc}
+    \toprule
+    \textbf{Item A} & \textbf{Item B} & \textbf{$r$ (Pearson)} & \textbf{$\rho$ (Spearman)} & \textbf{$r$ sem mar.--ago./2020} \\
+    \midrule
+    Costeletas suínas & Carnes moídas (bovinas) & +0,53 & +0,34 & +0,30 \\
+    Costeletas suínas & Bifes bovinos & +0,47 & +0,29 & +0,25 \\
+    Costeleta suína s/ osso & Carnes moídas (bovinas) & +0,46 & +0,30 & +0,26 \\
+    Manteiga & Café moído & +0,41 & +0,38 & +0,44 \\
+    \bottomrule
+  \end{tabular}
+  \fonte{Elaboração própria. Todos significativos após correção FDR ($p < 0{,}01$).}
+\end{table}
+
+Parte dessas ligações vem de um só episódio: o fechamento de frigoríficos na primavera de 2020 elevou carne suína e bovina ao mesmo tempo. Sem esses seis meses, o par mais forte cai de 0,53 para 0,30, enquanto manteiga $\times$ café se mantém (0,44). A análise de componentes principais confirma que o fator comum existe, mas é fraco: o primeiro componente explica 14,7\% da variação mensal, contra 4,9\% esperados com itens independentes.
+
+As correlações também mudam com o tempo. A correlação média entre alimentos, em janelas de 24 meses, sobe de 0,04 (mediana) para 0,18 na janela que cobre a pandemia. A correlação entre os índices de alimentos e de energia mudou de sinal: $-$0,37 em média até 2021 e +0,19 a partir de meados de 2022.
+
+\subsection{Energia antecipa alimentos?}
+
+Em variação de 12 meses, a correlação entre diesel e alimentos atinge o máximo com cinco meses de defasagem ($r = 0{,}51$) e a da gasolina, com seis ($r = 0{,}56$) (Figura~\ref{fig:defasagens}). A regressão com essa defasagem indica que 10\% de alta no diesel acompanham 0,8 ponto percentual a mais de inflação de alimentos ($\beta = 0{,}076$; $R^2 = 0{,}19$), mas o coeficiente não é significativo a 5\% com erros de Newey-West ($p = 0{,}078$).
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Correlação entre energia no mês $t$ e o índice de alimentos no mês $t + k$}
+  \label{fig:defasagens}
+  \includegraphics[width=0.95\textwidth]{fig3_defasagens}
+  \fonte{Elaboração própria a partir de \citeonline{bls2026}. Faixa cinza: $\pm 1{,}96/\sqrt{n}$, limite aproximado de significância a 5\%.}
+\end{figure}
+
+No teste de Granger com seis defasagens, só 2 das 16 combinações combustível $\times$ grupo passam após a correção FDR: a gasolina antecede a carne bovina e o índice geral de alimentos ($p$ ajustado = 0,044 em ambos). O diesel, apesar da correlação alta em 12 meses, não passa em nenhum grupo.
+
+% =====================================================================
+\section{Discussão e limitações}
+
+O resultado central é metodológico: em séries de preços, a correlação entre níveis mede sobretudo a inflação comum, não a ligação entre produtos. Uma análise que parasse na matriz de níveis concluiria que quase tudo se move junto. Ao remover tendência e sazonalidade, sobram poucas relações, e elas têm explicação econômica direta: o mesmo insumo (petróleo para gasolina e diesel), a mesma indústria (frigoríficos) ou o mesmo choque (pandemia).
+
+O segundo resultado é que ``tudo ficou mais caro'' só vale em termos nominais. Quase metade dos itens perdeu para a inflação, sobretudo laticínios, aves, ovos e suínos. A carne bovina e o café são as exceções persistentes, ainda em alta real depois de 2023.
+
+O terceiro resultado é que a relação entre energia e alimentos depende do período. Antes de 2022 os dois se moviam de forma independente ou oposta; no choque de 2021--2022 andaram juntos, com a energia à frente. Um único episódio sustenta boa parte da correlação, o que explica por que a regressão e o teste de Granger são fracos.
+
+Há quatro limitações. Os preços são médias nacionais e escondem diferenças entre regiões, marcas e embalagens. O deflator é o CPI-U geral, não o de alimentos. Buracos curtos (até dois meses) foram interpolados. Por fim, correlação e causalidade de Granger indicam associação e precedência, não causalidade econômica.
+
+% =====================================================================
+\section{Conclusão}
+
+Entre 2015 e 2026, os 62 itens analisados subiram em média 42\% em dólares, mas só 35 ganharam da inflação de 38,5\%. As associações entre preços são muito menores do que parecem: em variação mensal dessazonalizada, só 3\% dos pares têm $|r| > 0{,}5$, e os fortes pertencem à mesma cadeia produtiva. A energia antecede os alimentos em cinco a seis meses, mas de forma fraca e concentrada no choque de 2021--2022. Antes de qualquer ranking com esta base, é preciso corrigir as janelas de comparação, deflacionar os preços e trabalhar com variações, não com níveis.
+
+% ---------- Referências ----------
+\postextual
+\bibliography{referencias}
+
+\end{document}
